@@ -83,17 +83,17 @@ include '../includes/header.php';
 
 <div class="filter-section">
     <form method="GET" action="matches.php" class="filter-form">
-        <label>
-            월:
+        <label class="filter-inline">
+            <span>월</span>
             <input type="month" name="month" value="<?php echo htmlspecialchars($monthFilter); ?>">
         </label>
-        
-        <label>
-            지역:
+
+        <label class="filter-inline">
+            <span>지역</span>
             <select name="region">
                 <option value="">전체</option>
                 <?php foreach ($regions as $region): ?>
-                    <option value="<?php echo $region['id']; ?>" 
+                    <option value="<?php echo $region['id']; ?>"
                         <?php echo $regionFilter == $region['id'] ? 'selected' : ''; ?>>
                         <?php echo htmlspecialchars($region['name']); ?>
                     </option>
@@ -101,7 +101,7 @@ include '../includes/header.php';
             </select>
         </label>
         
-        <button type="submit">검색</button>
+        <button type="submit" class="btn">검색</button>
         <a href="matches.php" class="btn-reset">초기화</a>
     </form>
 </div>
@@ -129,7 +129,7 @@ include '../includes/header.php';
                     <?php if (!empty($match['region_name'])): ?>
                         <span class="region-badge"><?php echo htmlspecialchars($match['region_name']); ?></span>
                     <?php endif; ?>
-                    <?php 
+                    <?php
                     date_default_timezone_set('Asia/Seoul');
                     $status = getMatchStatus($match['match_date'], $match['match_time']);
                     $statusLabel = $status['label'];
@@ -138,26 +138,29 @@ include '../includes/header.php';
                     <span class="status-badge <?php echo $statusClass; ?>"><?php echo htmlspecialchars($statusLabel); ?></span>
                 </div>
                 <div class="match-teams-col">
-                    <div class="team-row">
+                    <div class="team-row team-row-inline">
                         <span class="team-name"><?php echo htmlspecialchars($match['home_team'] ?? ''); ?></span>
-                        <?php if ($status['status'] === 'finished' && isset($match['home_score']) && $match['home_score'] !== null): ?>
-                            <span class="score"><?php echo $match['home_score']; ?></span>
-                        <?php endif; ?>
-                    </div>
-                    <div class="team-row">
+                        <span class="vs-inline">VS</span>
                         <span class="team-name"><?php echo htmlspecialchars($match['away_team'] ?? ''); ?></span>
-                        <?php if ($status['status'] === 'finished' && isset($match['away_score']) && $match['away_score'] !== null): ?>
-                            <span class="score"><?php echo $match['away_score']; ?></span>
-                        <?php endif; ?>
                     </div>
+                    <?php if ($status['status'] === 'finished'): ?>
+                    <div class="team-row score-strip">
+                        <span class="score-label">스코어</span>
+                        <div class="score-group">
+                            <span class="score score-pill"><?php echo $match['home_score'] ?? '-'; ?></span>
+                            <span class="score score-pill">:</span>
+                            <span class="score score-pill"><?php echo $match['away_score'] ?? '-'; ?></span>
+                        </div>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 <div class="match-info-col">
-                    <p><strong><?php echo htmlspecialchars($match['stadium_name'] ?? ''); ?></strong></p>
+                    <p class="info-line"><span aria-hidden="true">🏟️</span> <strong><?php echo htmlspecialchars($match['stadium_name'] ?? ''); ?></strong></p>
                     <?php if (!empty($match['region_name'])): ?>
-                        <p><?php echo htmlspecialchars($match['region_name']); ?></p>
+                        <p class="info-line"><span aria-hidden="true">🗺️</span> <?php echo htmlspecialchars($match['region_name']); ?></p>
                     <?php endif; ?>
                     <?php if (isset($match['attendance']) && $match['attendance'] > 0): ?>
-                        <p class="attendance">관중: <?php echo number_format($match['attendance']); ?>명</p>
+                        <p class="attendance info-line"><span aria-hidden="true">👥</span> 관중 <?php echo number_format($match['attendance']); ?>명</p>
                     <?php endif; ?>
                 </div>
                 <div class="match-action-col">

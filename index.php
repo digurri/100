@@ -83,8 +83,8 @@ include '../includes/header.php';
 ?>
 
 <div class="hero-section">
-    <h2>오늘의 KBO 야구 경기</h2>
-    <p><?php echo date('Y년 m월 d일'); ?> 경기 일정</p>
+    <h2>오늘 펼쳐질 KBO 경기 소식</h2>
+    <p><?php echo date('Y년 m월 d일'); ?>, 부드럽게 정리한 일정이에요.</p>
 </div>
 
 <div class="stats-grid">
@@ -99,19 +99,18 @@ include '../includes/header.php';
             <p style="color: #999; font-style: italic; text-align: center;">오늘 예정된 경기가 없습니다.</p>
         <?php else: ?>
             <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-                <?php foreach ($regionStats as $stat): 
+                <?php foreach ($regionStats as $stat):
                     $regionName = $stat['region_name'];
                     $regionId = $regionNameToIdMap[$regionName] ?? null;
                     $todayMonth = date('Y-m');
                     if ($regionId !== null):
                 ?>
-                    <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
-                        <span><?php echo htmlspecialchars($regionName); ?>: <strong><?php echo $stat['match_count']; ?>경기</strong></span>
-                        <a href="matches.php?region=<?php echo urlencode($regionId); ?>&month=<?php echo urlencode($todayMonth); ?>" 
-                           class="btn btn-detail"
-                           style="padding: 6px 12px; font-size: 0.85rem; white-space: nowrap;"
+                    <div class="region-stat-row">
+                        <span class="region-stat-text"><?php echo htmlspecialchars($regionName); ?>: <strong><?php echo $stat['match_count']; ?>경기</strong></span>
+                        <a href="matches.php?region=<?php echo urlencode($regionId); ?>&month=<?php echo urlencode($todayMonth); ?>"
+                           class="btn btn-detail region-stat-link"
                            title="클릭하여 <?php echo htmlspecialchars($regionName); ?> 지역 경기 상세보기">
-                            상세보기
+                            상세보기<span aria-hidden="true">↗</span>
                         </a>
                     </div>
                 <?php else: ?>
@@ -139,7 +138,7 @@ include '../includes/header.php';
             <?php endforeach; ?>
         </select>
         
-        <button type="submit">검색</button>
+        <button type="submit" class="btn">검색</button>
     </form>
 </div>
 
@@ -165,25 +164,27 @@ include '../includes/header.php';
                     <div class="match-time">
                         <?php echo htmlspecialchars($match['time'] ?? ''); ?>
                     </div>
-                    <div class="match-teams">
+                    <div class="match-teams match-teams-inline">
                         <div class="team home-team">
-                            <strong><?php echo htmlspecialchars($match['home_team_name'] ?? ''); ?></strong>
+                            <strong class="team-name-compact"><?php echo htmlspecialchars($match['home_team_name'] ?? ''); ?></strong>
                             <?php if ($status['status'] === 'finished' && isset($match['home_score']) && $match['home_score'] !== null): ?>
-                                <span class="score"><?php echo $match['home_score']; ?></span>
+                                <span class="score score-pill"><?php echo $match['home_score']; ?></span>
                             <?php endif; ?>
                         </div>
                         <div class="vs">VS</div>
                         <div class="team away-team">
-                            <strong><?php echo htmlspecialchars($match['away_team_name'] ?? ''); ?></strong>
+                            <strong class="team-name-compact"><?php echo htmlspecialchars($match['away_team_name'] ?? ''); ?></strong>
                             <?php if ($status['status'] === 'finished' && isset($match['away_score']) && $match['away_score'] !== null): ?>
-                                <span class="score"><?php echo $match['away_score']; ?></span>
+                                <span class="score score-pill"><?php echo $match['away_score']; ?></span>
                             <?php endif; ?>
                         </div>
                     </div>
                     <div class="match-info">
-                        <p><strong>경기장:</strong> <?php echo htmlspecialchars($match['stadium_name'] ?? ''); ?></p>
+                        <p class="stadium-center"><strong>경기장</strong> <?php echo htmlspecialchars($match['stadium_name'] ?? ''); ?></p>
                     </div>
-                    <a href="match_detail.php?id=<?php echo $match['match_id'] ?? ''; ?>" class="btn-detail">상세보기</a>
+                    <div class="match-card-footer">
+                        <a href="match_detail.php?id=<?php echo $match['match_id'] ?? ''; ?>" class="btn-detail match-card-link">상세보기</a>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>

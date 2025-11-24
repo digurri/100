@@ -37,9 +37,9 @@ include '../includes/header.php';
 
 <div class="filter-section">
     <form method="GET" action="teams.php" class="filter-form">
-        <label>
-            팀 선택:
-            <select name="team" onchange="this.form.submit()">
+        <label class="filter-inline">
+            <span class="sr-only">팀 필터</span>
+            <select name="team" onchange="this.form.submit()" aria-label="팀 필터">
                 <option value="">전체 팀</option>
                 <?php foreach ($allTeamsForDropdown as $team): ?>
                     <option value="<?php echo $team['team_id'] ?? ''; ?>"
