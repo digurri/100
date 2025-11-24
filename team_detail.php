@@ -106,7 +106,7 @@ include '../includes/header.php';
                     <tbody>
                         <?php foreach ($players as $player): ?>
                             <tr>
-                                <td><?php echo isset($player['uniform_number']) && $player['uniform_number'] > 0 ? '#' . $player['uniform_number'] : '-'; ?></td>
+                                <td class="uniform-number"><?php echo isset($player['uniform_number']) && $player['uniform_number'] > 0 ? $player['uniform_number'] : '-'; ?></td>
                                 <td><strong><?php echo htmlspecialchars($player['name'] ?? ''); ?></strong></td>
                                 <td><span class="position-badge"><?php echo htmlspecialchars($player['position'] ?? '-'); ?></span></td>
                                 <td>

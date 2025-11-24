@@ -5,18 +5,28 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-primary: #667eea;
+  --color-primary-strong: #764ba2;
+  --color-muted: #666;
+  --color-text: #333;
+  --shadow-soft: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
 @font-face {
   font-family: "Pretendard";
-  src: url("../assets/fonts/PretendardVariable.woff2") format("woff2");
+  src: url("PretendardVariable.woff2") format("woff2");
   font-weight: 200 800;
   font-style: normal;
   font-display: swap;
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Pretendard", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: #333;
+  color: var(--color-text);
   background-color: #f5f5f5;
 }
 
@@ -24,6 +34,26 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+}
+
+.stat-card,
+.match-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section,
+.matches-list,
+.stadium-card,
+.sport-card,
+.region-card,
+.statistics-container,
+.team-stat-card,
+.players-table-container {
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
 }
 
 /* 헤더 및 네비게이션 */
@@ -72,17 +102,24 @@ header {
 
 /* 히어로 섹션 */
 .hero-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #6f7ae0 0%, #8f78e6 100%);
   color: white;
-  padding: 40px 20px;
+  padding: 48px 24px;
   text-align: center;
   margin-bottom: 30px;
-  border-radius: 10px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(118, 75, 162, 0.2);
 }
 
 .hero-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-size: 2.7rem;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.hero-section p {
+  font-size: 1.05rem;
+  opacity: 0.92;
 }
 
 /* 통계 카드 */
@@ -94,89 +131,95 @@ header {
 }
 
 .stat-card {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 24px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .stat-card h3 {
   color: #667eea;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
 }
 
 .stat-number {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: bold;
   color: #764ba2;
   display: block;
-  margin: 10px 0;
+  margin: 6px 0;
 }
 
 .stat-label {
-  color: #666;
-  font-size: 0.9rem;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.stat-card .stat-label {
+  font-size: 0.95rem;
+}
+
+.region-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+
+.region-stat-text {
+  font-size: 1.05rem;
+}
+
+.region-stat-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
 }
 
 /* 필터 섹션 */
 .filter-section {
-  background: white;
   padding: 20px;
-  border-radius: 10px;
   margin-bottom: 30px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .filter-form {
   display: flex;
-  gap: 15px;
+  gap: 18px;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .filter-form label {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
+}
+
+.filter-inline {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px !important;
+}
+
+.filter-inline span {
+  font-weight: 600;
+  color: #4b4b4b;
 }
 
 .filter-form select,
 .filter-form input[type="date"],
 .filter-form input[type="month"] {
-  padding: 8px 12px;
+  padding: 10px 14px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: inherit;
   min-width: 180px;
   width: auto;
-}
-
-.filter-form button,
-.btn-reset {
-  padding: 8px 20px;
-  background-color: #667eea;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: background-color 0.3s;
-}
-
-.filter-form button:hover,
-.btn-reset:hover {
-  background-color: #5568d3;
-}
-
-.btn-reset {
-  background-color: #6c757d;
-}
-
-.btn-reset:hover {
-  background-color: #5a6268;
 }
 
 /* 경기 카드 */
@@ -187,11 +230,11 @@ header {
 }
 
 .match-card {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 22px;
   transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .match-card:hover {
@@ -206,24 +249,39 @@ header {
 }
 
 .match-time {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: bold;
   color: #667eea;
   text-align: center;
-  margin: 15px 0;
+  margin: 4px 0 2px 0;
 }
 
 .match-teams {
   text-align: center;
-  margin: 20px 0;
+  margin: 6px 0 10px 0;
+}
+
+.match-teams-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
 }
 
 .team {
-  margin: 10px 0;
+  margin: 6px 0;
 }
 
 .team strong {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+}
+
+.team-name-compact {
+  display: inline-block;
+  max-width: 170px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .score {
@@ -234,10 +292,19 @@ header {
   color: #764ba2;
 }
 
+.score-pill {
+  background: #f2edff;
+  border-radius: 10px;
+  padding: 6px 10px;
+  min-width: 34px;
+  text-align: center;
+}
+
 .vs {
   font-weight: bold;
   color: #999;
   margin: 10px 0;
+  font-size: 1.05rem;
 }
 
 .match-info {
@@ -252,8 +319,24 @@ header {
   font-size: 0.9rem;
 }
 
+.stadium-center {
+  text-align: center;
+}
+
+.match-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.match-card-link {
+  align-self: flex-end;
+}
+
 /* 배지 */
-.sport-badge {
+.sport-badge,
+.region-badge,
+.status-badge {
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -276,20 +359,11 @@ header {
 }
 
 .region-badge {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
   background-color: #6c757d;
-  color: white;
-  display: inline-block;
 }
 
 .status-badge {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
   color: white;
-  display: inline-block;
 }
 
 .status-badge.status-scheduled {
@@ -311,10 +385,12 @@ header {
 
 /* 버튼 */
 .btn,
-.btn-detail {
+.btn-detail,
+.filter-form button,
+.btn-reset {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #667eea;
+  background-color: var(--color-primary);
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -325,15 +401,18 @@ header {
 }
 
 .btn:hover,
-.btn-detail:hover {
+.btn-detail:hover,
+.filter-form button:hover {
   background-color: #5568d3;
 }
 
-.btn-secondary {
+.btn-secondary,
+.btn-reset {
   background-color: #6c757d;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-reset:hover {
   background-color: #5a6268;
 }
 
@@ -347,10 +426,7 @@ header {
 
 /* 경기 목록 */
 .matches-list {
-  background: white;
-  border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .date-divider {
@@ -380,14 +456,20 @@ header {
 
 .match-time-col .time {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   color: #667eea;
+}
+
+.match-time-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .match-teams-col {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
 }
 
 .team-row {
@@ -396,14 +478,52 @@ header {
   align-items: center;
 }
 
+.team-row-inline {
+  justify-content: center;
+  gap: 14px;
+  font-size: 1.05rem;
+}
+
 .team-name {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.vs-inline {
+  font-weight: 700;
+  color: #9a9a9a;
+}
+
+.score-strip {
+  background: #f6f7ff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  align-items: center;
+  gap: 12px;
+}
+
+.score-label {
+  color: #555;
+  font-weight: 600;
+}
+
+.score-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .match-info-col p {
   margin: 5px 0;
   color: #666;
   font-size: 0.9rem;
+}
+
+.info-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
 }
 
 .attendance {
@@ -429,7 +549,7 @@ header {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 40px;
+  padding: 50px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 10px;
   color: white;
@@ -441,17 +561,19 @@ header {
 }
 
 .team-section h3 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+  font-size: 1.7rem;
+  margin-bottom: 18px;
+  letter-spacing: -0.01em;
 }
 
 .score-large {
-  font-size: 4rem;
+  font-size: 4.6rem;
   font-weight: bold;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.25);
 }
 
 .vs-section {
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: bold;
 }
 
@@ -512,10 +634,7 @@ header {
 }
 
 .team-stat-card {
-  background: white;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -552,14 +671,18 @@ header {
   background: #e9ecef;
 }
 
-.stat-label {
-  color: #666;
+.stat-items .stat-label,
+.stat-section .stat-label,
+.sport-stats .stat-label,
+.region-stats .stat-label {
   font-size: 0.9rem;
-  font-weight: 500;
 }
 
-.stat-value {
-  color: #667eea;
+.stat-items .stat-value,
+.stat-section .stat-value,
+.sport-stats .stat-value,
+.region-stats .stat-value {
+  color: var(--color-primary);
   font-size: 1.1rem;
   font-weight: bold;
 }
@@ -602,14 +725,14 @@ header {
   flex: 1;
 }
 
-.match-header {
+.broadcast-item .match-header {
   display: flex;
   gap: 10px;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.match-teams {
+.broadcast-item .match-teams {
   font-size: 1.1rem;
   margin: 10px 0;
 }
@@ -641,11 +764,12 @@ header {
 .stadium-card,
 .sport-card,
 .region-card {
-  background: white;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .stadium-card:hover,
@@ -667,6 +791,7 @@ header {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
+  justify-content: flex-end;
 }
 
 .stadium-info p,
@@ -674,6 +799,7 @@ header {
 .region-stats {
   margin: 10px 0;
   color: #666;
+  text-align: center;
 }
 
 .sport-stats,
@@ -692,21 +818,9 @@ header {
   border-radius: 5px;
 }
 
-.stat-label {
-  color: #666;
-}
-
-.stat-value {
-  font-weight: bold;
-  color: #667eea;
-}
-
 /* 통계 테이블 */
 .statistics-container {
-  background: white;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .stat-section {
@@ -824,6 +938,18 @@ footer {
   font-size: 1.1rem;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* 테이블 내 데이터 없음 표시 */
 table .no-data {
   padding: 20px;
@@ -868,18 +994,36 @@ table .no-data {
 
 /* 팀 관련 스타일 - 경기장과 동일한 스타일 사용 */
 
+.stadium-detail,
 .team-detail {
   background: white;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
+.stadium-detail h2,
+.team-detail h2 {
+  text-align: center;
+}
+
+.stadium-info-grid,
 .team-info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   margin-bottom: 30px;
+}
+
+.stadium-matches,
+.players-section {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 /* 선수 관련 스타일 */
@@ -948,9 +1092,6 @@ table .no-data {
 .players-table-container {
   overflow-x: auto;
   margin-top: 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .players-table {
@@ -1001,6 +1142,12 @@ table .no-data {
   color: #333;
 }
 
+.players-table td.uniform-number {
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+}
+
 .players-table td strong {
   color: #667eea;
   font-weight: 600;
@@ -1030,15 +1177,14 @@ table .no-data {
   gap: 3px;
 }
 
-.stat-label {
+.position-stat .stat-label {
   font-size: 0.75rem;
   color: #6c757d;
-  font-weight: 500;
 }
 
-.stat-value {
+.position-stat .stat-value {
   font-size: 0.95rem;
-  color: #667eea;
+  color: var(--color-primary);
   font-weight: 700;
 }
 
