@@ -1,8 +1,8 @@
 <!-- 팀 목록 페이지 -->
 
 <?php
-require_once '../config/database.php';
-require_once '../helpers/api_helper.php';
+require_once 'database.php';
+require_once 'api_helper.php';
 $db = getDB();
 
 $pageTitle = "KBO 팀 목록";
@@ -30,16 +30,16 @@ if ($result['success']) {
 
 $allTeamsForDropdown = $allTeams ?? [];
 
-include '../includes/header.php';
+include 'header.php';
 ?>
 
 <h2>KBO 팀 목록</h2>
 
 <div class="filter-section">
     <form method="GET" action="teams.php" class="filter-form">
-        <label>
-            팀 선택:
-            <select name="team" onchange="this.form.submit()">
+        <label class="filter-inline">
+            <span class="sr-only">팀 필터</span>
+            <select name="team" onchange="this.form.submit()" aria-label="팀 필터">
                 <option value="">전체 팀</option>
                 <?php foreach ($allTeamsForDropdown as $team): ?>
                     <option value="<?php echo $team['team_id'] ?? ''; ?>"
@@ -77,5 +77,5 @@ include '../includes/header.php';
     <?php endif; ?>
 </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
 

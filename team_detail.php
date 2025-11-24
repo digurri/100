@@ -2,8 +2,8 @@
  
 
 <?php
-require_once '../config/database.php';
-require_once '../helpers/api_helper.php';
+require_once 'database.php';
+require_once 'api_helper.php';
 $db = getDB();
 
 $pageTitle = "KBO 팀 상세";
@@ -54,7 +54,7 @@ if ($result['success']) {
     }
 }
 
-include '../includes/header.php';
+include 'header.php';
 ?>
 
 <div class="team-detail">
@@ -106,7 +106,7 @@ include '../includes/header.php';
                     <tbody>
                         <?php foreach ($players as $player): ?>
                             <tr>
-                                <td><?php echo isset($player['uniform_number']) && $player['uniform_number'] > 0 ? '#' . $player['uniform_number'] : '-'; ?></td>
+                                <td class="uniform-number"><?php echo isset($player['uniform_number']) && $player['uniform_number'] > 0 ? $player['uniform_number'] : '-'; ?></td>
                                 <td><strong><?php echo htmlspecialchars($player['name'] ?? ''); ?></strong></td>
                                 <td><span class="position-badge"><?php echo htmlspecialchars($player['position'] ?? '-'); ?></span></td>
                                 <td>
@@ -142,5 +142,5 @@ include '../includes/header.php';
     </div>
 </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
 

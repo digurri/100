@@ -10,11 +10,11 @@ if (!$matchId) {
 }
 
 if (!isset($db)) {
-    require_once '../config/database.php';
+    require_once 'database.php';
     $db = getDB();
 }
 
-require_once '../helpers/api_helper.php';
+require_once 'api_helper.php';
 
 $comments = [];
 $apiBaseUrl = getApiBaseUrl(3);

@@ -1,8 +1,8 @@
 <!-- 종목별 경기 일정 페이지 -->
 
 <?php 
-require_once '../config/database.php';
-require_once '../helpers/match_helper.php';
+require_once 'database.php';
+require_once 'match_helper.php';
 $db = getDB();
 
 $pageTitle = "KBO 야구";
@@ -28,7 +28,7 @@ $query = "
 
 $matches = $db->query($query)->fetchAll();
 
-include '../includes/header.php';
+include 'header.php';
 ?>
 
 <h2>KBO 야구 경기 일정</h2>
@@ -89,6 +89,6 @@ include '../includes/header.php';
         <?php endif; ?>
     </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
 
 

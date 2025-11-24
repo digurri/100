@@ -1,9 +1,9 @@
 <!-- 경기장 상세 페이지 -->
 
 <?php
-require_once '../config/database.php';
-require_once '../helpers/match_helper.php';
-require_once '../helpers/api_helper.php';
+require_once 'database.php';
+require_once 'match_helper.php';
+require_once 'api_helper.php';
 $db = getDB();
 
 $pageTitle = "KBO 야구 경기장 정보";
@@ -54,7 +54,7 @@ if ($stadiumId && $stadiumId > 0) {
         ];
     }
     
-    include '../includes/header.php';
+    include 'header.php';
     ?>
     
     <div class="stadium-detail">
@@ -178,7 +178,7 @@ if ($stadiumId && $stadiumId > 0) {
     
     $regions = $db->query("SELECT * FROM regions ORDER BY name")->fetchAll();
     
-    include '../includes/header.php';
+    include 'header.php';
     ?>
     
     <h2>KBO 야구 경기장 정보</h2>
@@ -245,7 +245,7 @@ if ($stadiumId && $stadiumId > 0) {
     <?php
 }
 
-include '../includes/footer.php';
+include 'footer.php';
 ?>
 
 

@@ -1,9 +1,9 @@
 <!-- 경기 상세 페이지 -->
 
 <?php
-require_once '../config/database.php';
-require_once '../helpers/match_helper.php';
-require_once '../helpers/api_helper.php';
+require_once 'database.php';
+require_once 'match_helper.php';
+require_once 'api_helper.php';
 $db = getDB();
 
 $pageTitle = "KBO 야구 경기 상세";
@@ -159,7 +159,7 @@ if ($teamComparison) {
     ];
 }
 
-include '../includes/header.php';
+include 'header.php';
 ?>
 
 <div class="match-detail">
@@ -396,7 +396,7 @@ include '../includes/header.php';
 </div>
 
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
 
 
 
